@@ -57,6 +57,7 @@ function djikstra(graph, sy, sx, rows, cols) {
 
     while(pq.size() > 0) {
         const [curEffort, cy, cx] = pq.pop();
+        if(cy === rows - 1 && cx === cols - 1) return curEffort
 
         if(dist[cy][cx] < curEffort) continue;
         for(const [effort, ny, nx] of graph[cy][cx]) {
@@ -105,5 +106,5 @@ var minimumEffortPath = function(heights) {
 
     const dist = djikstra(graph, 0, 0, rows, columns);
     
-    return dist[rows - 1][columns -1];
+    return dist
 };
