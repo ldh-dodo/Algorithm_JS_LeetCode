@@ -6,6 +6,8 @@ var findCircleNum = function(isConnected) {
     const n = isConnected.length;
     const p = Array(n);
     const rank = Array(n);
+    
+    let provinceCnt = n;
 
     // make-set
     for(let i = 0; i < n; i++) {
@@ -35,17 +37,10 @@ var findCircleNum = function(isConnected) {
     }
 
     for(let u = 0; u < n; u++) {
-        for(let v = 0; v < n; v++) {
-            if(u === v || !isConnected[u][v]) continue;
-            union(u, v);
+        for(let v = u + 1; v < n; v++) {
+            if(isConnected[u][v] && union(u, v)) provinceCnt--;
         }
     }
 
-    const result = new Set();
-
-    for(let u = 0; u < n; u++) {
-        result.add(find(u));
-    }
-
-    return result.size;
+    return provinceCnt;
 };
