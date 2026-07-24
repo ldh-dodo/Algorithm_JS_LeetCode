@@ -25,8 +25,6 @@ var findOrder = function(numCourses, prerequisites) {
         result.push(cur);
         count++;
         
-        if(indegree[cur] !== 0) return [];
-
         for(const next of graph[cur]) {
             indegree[next]--;
             if(indegree[next] === 0) q.push(next);
